@@ -99,11 +99,11 @@ while elapsed_time < model_run_time:
                                                 rmg, np.abs(of.q)) * rmg.dx)
 
     ## Calculating water surface slope from the OverlandFlow component.
-    rmg['node']['surface_water__slope'] = ((of.slope[rmg.links_at_node] *
+    rmg['node']['water_surface__slope'] = ((of.slope[rmg.links_at_node] *
                                     rmg.active_link_dirs_at_node).max(axis=1))
 
     ## Eroding topographic__elevation using DetachmentLtdErosion component.
-    dle.erode(of.dt, slope='surface_water__slope')
+    dle.erode(of.dt, slope='water_surface__slope')
 
     ## Updating topographic__elevation after surface was eroded in
     ## DetachmentLtdErosion component.
