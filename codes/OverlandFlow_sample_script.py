@@ -74,6 +74,6 @@ while elapsed_time < model_run_time:
 #plt.title('Outlet Hydrograph, Rainfall: 5 mm/hr in 2 hr')
 
 ## Plotting water depth maps
-imshow_grid(rmg, 'water__depth', plot_name='Water depth at time = 2 hr',
+imshow_grid(rmg, 'surface_water__depth', plot_name='Water depth at time = 2 hr',
         var_name='Water Depth', var_units='m', grid_units=('m', 'm'),
         cmap='Blues')
