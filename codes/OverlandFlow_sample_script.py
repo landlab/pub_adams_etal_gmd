@@ -6,9 +6,9 @@ ESRI ASCII file, simulating a 5 mm/hr rainfall intensity over 2 hours, the
 standard storm example from Adams et al., in prep for Geoscientific Model Development.
 
 Written by Jordan Adams, August 2016
-"""
-## Step 1
 
+
+## Step 1
 from landlab.components import OverlandFlow, SinkFiller # SinkFiller is optional, Step #4
 from landlab.io import read_esri_ascii
 import numpy as np
@@ -17,7 +17,7 @@ from landlab.plot import imshow_grid  # plotter functions are optional
 from matplotlib import pyplot as plt
 
 ## Step 2: Reading in a watershed DEM
-watershed_dem = '/Users/Jordan/Desktop/Square_TestBasin.asc'
+watershed_dem = 'Square_TestBasin.asc'
 (rmg, z) = read_esri_ascii(watershed_dem, name='topographic__elevation')
 
 ## --OR-- Step 2: Setting up a generic RasterModelGrid
