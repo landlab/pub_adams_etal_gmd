@@ -70,8 +70,8 @@ discharge_at_outlet = []
 hydrograph_time = []
 
 ## Setting initial fields...
-rmg['node']['water__discharge'] = np.zeros(rmg.number_of_nodes)
-rmg['node']['water_surface__slope'] = np.zeros(rmg.number_of_nodes)
+rmg['node']['surface_water__discharge'] = np.zeros(rmg.number_of_nodes)
+rmg['node']['surface_water__slope'] = np.zeros(rmg.number_of_nodes)
 
 ## Running the overland flow component.
 while elapsed_time < model_run_time:
@@ -95,15 +95,15 @@ while elapsed_time < model_run_time:
 
     ## Mapping water discharge from links (m^2/s) to nodes (m^3/s) for use
     ## in the DetachmentLtdErosion component.
-    rmg['node']['water__discharge'] = (map_max_of_inlinks_to_node(
+    rmg['node']['surface_water__discharge'] = (map_max_of_inlinks_to_node(
                                                 rmg, np.abs(of.q)) * rmg.dx)
 
     ## Calculating water surface slope from the OverlandFlow component.
-    rmg['node']['water_surface__slope'] = ((of.slope[rmg.links_at_node] *
+    rmg['node']['surface_water__slope'] = ((of.slope[rmg.links_at_node] *
                                     rmg.active_link_dirs_at_node).max(axis=1))
 
     ## Eroding topographic__elevation using DetachmentLtdErosion component.
-    dle.erode(of.dt, slope='water_surface__slope')
+    dle.erode(of.dt, slope='surface_water__slope')
 
     ## Updating topographic__elevation after surface was eroded in
     ## DetachmentLtdErosion component.
