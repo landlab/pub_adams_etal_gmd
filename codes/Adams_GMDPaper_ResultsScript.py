@@ -71,7 +71,7 @@ hydrograph_time = []
 
 ## Setting initial fields...
 rmg['node']['surface_water__discharge'] = np.zeros(rmg.number_of_nodes)
-rmg['node']['surface_water__slope'] = np.zeros(rmg.number_of_nodes)
+rmg['node']['water_surface__slope'] = np.zeros(rmg.number_of_nodes)
 
 ## Running the overland flow component.
 while elapsed_time < model_run_time:
