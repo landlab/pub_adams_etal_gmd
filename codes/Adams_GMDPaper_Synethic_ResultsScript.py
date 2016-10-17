@@ -1,22 +1,21 @@
 """
-overland_flow_driver.py
+Adams_GMDPaper_Synthetic_ResultsScript.py
 
 OverlandFlow component example, initializing a 30 m square watershed from an
 ESRI ASCII file, simulating one of the rainfall events from Adams et al.,
 in prep for Geoscientific Model Development.
 
-Written by Jordan Adams, August 2016
+Written by Jordan Adams, October 2016
 
 """
 
 from landlab.components import OverlandFlow, DetachmentLtdErosion
 from landlab.io import read_esri_ascii
-from landlab.grid.raster_mappers import map_max_of_inlinks_to_node
 import numpy as np
 from matplotlib import pyplot as plt
 
-### For each storm event described in Adams et al., in prep, set both the
-### basin flag and the storm flag for the event.
+### For each storm event described in Adams et al., in prep, synethic results
+### set both the basin flag and the storm flag for the event.
 basin_flag = 'Square' # 'Long'
 storm_flag = 'Base' # 'HigherIntensity' # 'LongerDuration'
 
@@ -95,12 +94,18 @@ while elapsed_time < model_run_time:
 
     ## Mapping water discharge from links (m^2/s) to nodes (m^3/s) for use
     ## in the DetachmentLtdErosion component.
-    rmg['node']['surface_water__discharge'] = (map_max_of_inlinks_to_node(
-                                                rmg, np.abs(of.q)) * rmg.dx)
 
+    node_slope = (of.slope[rmg.links_at_node] * rmg.active_link_dirs_at_node)
+
+    incision_Q = np.abs(of.q * rmg.dx)[rmg.links_at_node]
+
+    rmg['node']['surface_water__discharge'] = (incision_Q[np.arange(len(
+                                node_slope)), np.argmax(node_slope, axis=1)])
+
+    node_slope = node_slope.max(axis=1)
+
+    rmg['node']['water_surface__slope'] = node_slope
     ## Calculating water surface slope from the OverlandFlow component.
-    rmg['node']['water_surface__slope'] = ((of.slope[rmg.links_at_node] *
-                                    rmg.active_link_dirs_at_node).max(axis=1))
 
     ## Eroding topographic__elevation using DetachmentLtdErosion component.
     dle.erode(of.dt, slope='water_surface__slope')
