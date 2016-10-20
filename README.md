@@ -20,5 +20,4 @@ http://landlab.readthedocs.org
 
 (Last updated October 2016)
 
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.161446.svg)](https://doi.org/10.5281/zenodo.161446)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.162058.svg)](https://doi.org/10.5281/zenodo.162058)
