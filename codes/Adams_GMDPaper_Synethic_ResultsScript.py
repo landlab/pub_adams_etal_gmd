@@ -118,13 +118,15 @@ while elapsed_time < model_run_time:
     hydrograph_time.append(elapsed_time)
     discharge_at_outlet.append(np.abs(of.q[link_to_sample]) * rmg.dx)
 
-   # print(elapsed_time)
+    #print(elapsed_time)
     ## Updating elapsed_time
     elapsed_time += of.dt
 
+hr = [x / 3600. for x in hydrograph_time]
 ## Plotting the hydrograph at the outlet
 plt.figure(1)
-plt.plot(hydrograph_time, discharge_at_outlet, 'k-')
+plt.plot(hr, discharge_at_outlet, 'k-')
 plt.ylabel('Discharge (cms)')
 plt.xlabel('Time (hr)')
+plt.xlim(0, 8)
 plt.title('Hydrograph at Basin Outlet')
