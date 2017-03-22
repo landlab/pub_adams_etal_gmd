@@ -118,7 +118,7 @@ while elapsed_time < model_run_time:
     hydrograph_time.append(elapsed_time)
     discharge_at_outlet.append(np.abs(of.q[link_to_sample]) * rmg.dx)
 
-    print(elapsed_time)
+   # print(elapsed_time)
     ## Updating elapsed_time
     elapsed_time += of.dt
 
