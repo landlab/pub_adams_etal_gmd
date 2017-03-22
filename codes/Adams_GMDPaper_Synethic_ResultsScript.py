@@ -95,7 +95,7 @@ while elapsed_time < model_run_time:
     ## Mapping water discharge from links (m^2/s) to nodes (m^3/s) for use
     ## in the DetachmentLtdErosion component.
 
-    node_slope = (of.slope[rmg.links_at_node] * rmg.active_link_dirs_at_node)
+    node_slope = (of.water_surface_slope[rmg.links_at_node] * rmg.active_link_dirs_at_node)
 
     incision_Q = np.abs(of.q * rmg.dx)[rmg.links_at_node]
 
